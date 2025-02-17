@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="web.css">
+    <title>Paramètre pour la photo</title>
+</head>
+
+<body>
+<div class = "container">
+    <h1>Paramètre pour la photo</h1>
+    <!--<form id = "param">
+        <label for="fname">Nom du Fichier</label>
+        <input type="text" id = "fname" name = "fname"></label><br>
+    </form>-->
+    <select name = "mcharge" id="mcharge" onchange="toggleNameInput(this);">
+    <label for="uploadname">Façon de téléchargement</label><br>
+    <option value = "1">Prendre une photo avec la caméra</option>
+    <option value = "2">Charger une photo</option>
+    <option value = "3">Prendre une photo avec Rasberry</option>
+    </select>
+
+
+<div class = "info-box">
+    <label for = "fname">Veuillez rentrer le nom de votre fichier</label>
+    <input type = "text" id = "fname" name="fname" value = "" /><br>
+    <div class = "button">
+    <input type = "button" id = "button" value = "Soumettre" onclick ="submitForm()" /><br>
+    </div>
+</div>
+</div> 
+<script src = "photo.js"></script>
+</body>
+<!--<script>
+    function verif_champ() 
+    { 
+    var mots_cles =document.getElementById("input").value;
+        if (mots_cles == "") 
+        { 
+        alert("Un champ n'est pas remplie"); 
+        return false; 
+        } 
+        return true; 
+    } 
+    </script>
+    <body> 
+    
+    <h2> Un champs de texte vide (Testez)</h2>
+    <form>
+    <input type="text" id="input" name="mots_cles" value=""><br>
+    <input type="button" id="bouton" value="Valider" onclick="verif_champ()">
+    </form>

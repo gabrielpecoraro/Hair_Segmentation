@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détection d'âge et de genre</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f3f3;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+        }
+        h1 {
+            margin-top: 0;
+        }
+        input[type="file"] {
+            margin: 20px auto;
+            display: block;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        img {
+            display: block;
+            margin: 0 auto 20px;
+            max-width: 100%;
+            height: auto;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        .result-item {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Détection d'âge et de genre</h1>
+        <form id="upload-form" action="/detect" method="post" enctype="multipart/form-data">
+            <input id="file-input" type="file" name="image" accept="image/*">
+            <button type="submit">Détecter</button>
+        </form>
+        <img id="detected-image" src="" alt="Résultat de la détection" style="display: none;">
+        <div class="result">
+            <div class="result-item" id="age-estimate"></div>
+            <div class="result-item" id="gender-estimate"></div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('upload-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Empêcher l'envoi du formulaire
+
+            // Soumettre le formulaire via AJAX
+            var formData = new FormData(this);
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', this.action, true);
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    // Mettre à jour la source de l'image avec les données reçues
+                    var detectedImage = document.getElementById('detected-image');
+                    detectedImage.src = URL.createObjectURL(xhr.response);
+                    detectedImage.style.display = 'block'; // Afficher l'image
+
+                    // Extraire l'âge et le sexe de la réponse
+                    var response = JSON.parse(xhr.responseText);
+                    var age = response.age;
+                    var gender = response.gender;
+
+                    // Afficher l'âge estimé et le genre estimé
+                    var ageEstimate = document.getElementById('age-estimate');
+                    ageEstimate.textContent = "Âge estimé: " + age;
+
+                    var genderEstimate = document.getElementById('gender-estimate');
+                    genderEstimate.textContent = "Genre estimé: " + gender;
+                }
+            };
+            xhr.responseType = 'blob'; // Recevoir une réponse sous forme de Blob
+            xhr.send(formData);
+        });
+    </script>
+</body>
+</html>

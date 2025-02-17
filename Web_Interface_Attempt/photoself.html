@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="web.css">
+    <title>Paramètre pour la photo</title>
+</head>
+<!--<div id = "overview" class = "container">
+    <label>Nous allons prendre une photo de vous</label>
+    <script LANGUAGE = "JAVASCRIPT">
+        var cpt = 10 ;
+var x ;
+function decompte()
+{
+if(cpt>=1)
+{
+document.getElementById("overview").innerHTML = "La page s'affichera dans " + cpt + "sec" ;
+cpt-- ;
+x = setTimeout("decompte()",1000) ;
+}
+else
+{
+clearTimeout(x) ;
+}
+}
+    </script>    
+</div>
+--> 
+<!--
+<script src = photoself.js></script>
+
+
+<p><span id="errorMsg"></span></p>
+    
+<!-- Stream video via webcam -->
+<!--<div class="video-wrap">
+    <video id="video" playsinline autoplay></video>
+</div>
+
+<!-- Trigger canvas web API -->
+<!--<div class="controller">
+    <button id="snap">Capture</button>
+</div>
+
+<!-- Webcam video snapshot -->
+<!--<canvas id="canvas" width="640" height="480"></canvas>
+-->
+<script type="text/javascript" src="https://unpkg.com/webcam-easy/dist/webcam-easy.min.js"></script>
+<video id="webcam" autoplay playsinline width="640" height="480"></video>
+<canvas id="canvas" class="d-none"></canvas>
+<audio id="snapSound" src="audio/snap.wav" preload = "auto"></audio>
+
+
+<script src = photoself.js></script>
