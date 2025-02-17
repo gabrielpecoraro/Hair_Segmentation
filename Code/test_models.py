@@ -19,7 +19,7 @@ model.load_state_dict(torch.load("./models/unet.pth"))
 model.eval()
 
 # Load and preprocess a single image
-image_path = "mehdi.png"  # Replace with the path to your test image
+image_path = "your_path"  # Replace with the path to your test image
 input_image = cv2.imread(image_path)
 
 hsv_img = cv2.cvtColor(input_image, cv2.COLOR_BGR2HSV)
