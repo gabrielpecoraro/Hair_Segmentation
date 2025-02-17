@@ -37,6 +37,14 @@ https://www.kaggle.com/datasets/arghyadutta1/celebmask
 
 # Run the hair segmentation and color transfer script
 python training_main.py
+
+# Run the testing phase on a chosen file :
+# Either 
+test_model.py
+# Or
+test_model2.py
+# Or
+test_models.py
 ```
 
 (Optional) Deploy on Raspberry Pi following the instructions in the documentation.
