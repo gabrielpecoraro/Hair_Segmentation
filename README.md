@@ -32,8 +32,9 @@ Raspberry Pi (for embedded implementation)
 # Clone this repository
 git clone https://github.com/gabrielpecoraro/Hair_Segmentation.git
 
-# Download the Dataset
+# Download the Dataset # or use the small one in dataset
 https://www.kaggle.com/datasets/arghyadutta1/celebmask
+
 
 # Run the hair segmentation and color transfer script
 python training_main.py
