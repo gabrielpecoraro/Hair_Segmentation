@@ -7,14 +7,14 @@ This project focuses on real-time hair segmentation and color transfer using dee
 - **Hair Segmentation**: Uses a deep learning model trained on the CelebAMask-HQ dataset to accurately segment hair in images.
 - **Color Transfer**: Implements color transformation using the HSV color space to achieve realistic hair color changes.
 - **Embedded System Deployment**: The model is integrated into a Raspberry Pi system for real-time processing.
-- **Web Interface (Prototype)**: Initial attempts were made to develop a web interface for user interaction.
+- **Web Interface (Not Finished)**: Initial attempts were made to develop a web interface for user interaction.
 
 ## Technologies Used
 - **Programming Language**: Python
 - **Machine Learning Framework**: PyTorch
 - **Computer Vision**: OpenCV
 - **Embedded System**: Raspberry Pi
-- **Web Development**: HTML, CSS, JavaScript (prototype)
+- **Web Development**: HTML, CSS, JavaScript (Not Finished)
 
 ⚠ Warning: Before running the script, ensure you modify the file paths in the script to match your system configuration.
 
@@ -58,7 +58,7 @@ Run the Python script to process images and videos.
 # Embedded Mode
 Capture and process images in real-time using a Raspberry Pi and an attached camera.
 
-# Web Interface (Work in Progress)
+# Web Interface (Not Finished)
 Intended for user-friendly interaction but requires further development.
 ```
 
