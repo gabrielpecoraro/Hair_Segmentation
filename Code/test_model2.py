@@ -15,7 +15,7 @@ model.load_state_dict(torch.load('./models/unet.pth'))
 model.eval()
 
 # Load and preprocess a single image
-image_path = 'blanche.jpg'  # Replace with the path to your t²est image
+image_path = 'your_path'  # Replace with the path to your t²est image
 input_image = Image.open(image_path).convert("RGB")
 
 # Définir la transformation pour redimensionner l'image en 256x256 pixels
