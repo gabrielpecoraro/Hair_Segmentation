@@ -49,10 +49,10 @@ image_redimensionnee.convert('RGB')
 
 # Show the predicted segmentation mask
 result_image = Image.fromarray(segmentation_mask)
-result_image.save('predicted_gab.jpg')
+result_image.save('your_file.jpg')
 
 # Charger l'image en niveaux de gris
-image_gris = Image.open('Predicted_gab.jpg')
+image_gris = Image.open('your_file.jpg')
 
 largeur, hauteur = image_gris.size
 
@@ -87,14 +87,14 @@ for y in range(hauteur):
 
 # Enregistrer l'image résultante
 #image_rgb.save('image_rouge.png')
-image_redimensionnee.save('python.jpg')
-nouvelle_image.save('Predicted_gab.png')
+image_redimensionnee.save('your_file.jpg')
+nouvelle_image.save('your_file.png')
 
 # Ouvrir l'image initiale
-image_initiale = Image.open("python.jpg")
+image_initiale = Image.open("your_file.jpg")
 
 # Ouvrir le masque rouge
-masque_rouge = Image.open("Predicted_gab.png")
+masque_rouge = Image.open("your_file.png")
 
 
 # Superposer le masque rouge redimensionné sur l'image initiale
@@ -111,4 +111,4 @@ nouvelle_image.show('image avec mask')
 result_image.show(title="Predicted Segmentation Mask")
 
 # Save the result image
-result_image.save('rouge.png')
+result_image.save('your_file.png')
