@@ -25,10 +25,10 @@ input_image = cv2.imread(image_path)
 hsv_img = cv2.cvtColor(input_image, cv2.COLOR_BGR2HSV)
 
 
-# Définir la transformation pour redimensionner l'image en 256x256 pixels
+# Define transformation to resize at 256x256
 transform = transforms.Resize((256, 256))
 
-# Appliquer la transformation à l'image
+# Apply transformation
 image_redimensionnee = transform(input_image)
 
 # Apply the same transformations as during training
@@ -59,14 +59,14 @@ image_redimensionnee.convert("RGB")
 
 # Show the predicted segmentation mask
 result_image = Image.fromarray(segmentation_mask)
-result_image.save("Predicted_romain.jpg")
+result_image.save("Predicted_your_file")
 
-# Charger l'image en niveaux de gris
-image_gris = Image.open("Predicted_romain.jpg")
+# Load image with grey scale
+image_gris = Image.open("Predicted_your_file")
 
 largeur, hauteur = image_gris.size
 
-# Convertir l'image en mode RGB (couleurs)
+# convert in RGB
 # image_rgb = image_gris.convert('RGB')
 
 couleur_fond = (0, 0, 0)  # (R, G, B)
@@ -77,7 +77,7 @@ ave = 0
 i = 0
 for y in range(hauteur):
     for x in range(1, largeur):
-        # Récupérer la valeur de gris du pixel
+        # Retrive grey pixel value
         valeur_gris = image_gris.getpixel((x, y))
         valeur_gris_precedente = image_gris.getpixel((x - 1, y))
 
@@ -94,7 +94,7 @@ for y in range(hauteur):
                 i += 1
                 print("moyenne pixels blancs =", moy)
 
-        # Mettre à jour le pixel de l'image RGB avec la nouvelle couleur
+        # Update with new value
         # nouvelle_image.putpixel((x, y), couleur)
 
 print("nb_pixel =", i)
@@ -143,25 +143,25 @@ for y in range(hauteur):
             nouvelle_image.putpixel((x, y), valeur_originale)
 
 
-# Enregistrer l'image résultante
+# Save image
 # image_rgb.save('image_rouge.png')
-image_redimensionnee.save("mehdi.png")
-nouvelle_image.save("Predicted_mehdi.png")
+image_redimensionnee.save("your_file")
+nouvelle_image.save("Predicted_your_file")
 
-# Ouvrir l'image initiale
-image_initiale = Image.open("mehdi.png")
+# open image
+image_initiale = Image.open("your_file")
 
-# Ouvrir le masque rouge
-masque_rouge = Image.open("Predicted_mehdi.png")
+# open red mask
+masque_rouge = Image.open("Predicted_your_file")
 
 
-# Superposer le masque rouge redimensionné sur l'image initiale
+# Superpose images
 # image_superposee = Image.alpha_composite(image_initiale.convert("RGBA"), masque_rouge.convert("RGBA"))
 
-# Sauvegarder l'image superposée
+# save new image
 # image_superposee.save("image_superposee2.png")
 
-# Afficher l'image
+# display image
 nouvelle_image.show("image avec mask")
 
 # image_superposee.show('image superpose')
