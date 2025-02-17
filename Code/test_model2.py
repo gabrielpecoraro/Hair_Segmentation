@@ -15,13 +15,13 @@ model.load_state_dict(torch.load('./models/unet.pth'))
 model.eval()
 
 # Load and preprocess a single image
-image_path = 'your_path'  # Replace with the path to your t²est image
+image_path = 'your_path'  # Replace with the path to your test image
 input_image = Image.open(image_path).convert("RGB")
 
-# Définir la transformation pour redimensionner l'image en 256x256 pixels
+# Define the transformation to resize the image to 256x256 pixels
 transform = transforms.Resize((256, 256))
 
-# Appliquer la transformation à l'image
+# Apply the transformation to the image
 image_redimensionnee = transform(input_image)
 
 # Apply the same transformations as during training
@@ -42,69 +42,62 @@ with torch.no_grad():
 output_np = output.argmax(1).squeeze().cpu().numpy()
 segmentation_mask = (output_np * 255).astype(np.uint8)
 
-# Convertir l'image de RGB à HSV
+# Convert the image from RGB to HSV color space
 hsv_person = cv2.cvtColor(np.array(image_redimensionnee), cv2.COLOR_RGB2HSV)
 
-# Repasser dans l'espace RGB
+# Convert back to RGB color space
 person_rgb = cv2.cvtColor(hsv_person, cv2.COLOR_HSV2RGB)
 
-# Convertir le masque en une image en niveaux de gris
+# Convert the segmentation mask to a grayscale image
 segmentation_mask_gray = cv2.cvtColor(segmentation_mask, cv2.COLOR_GRAY2BGR)
 
-
-# Convertir le masque en une image avec trois canaux (HSV)
+# Convert the mask to HSV color space
 mask_hsv = cv2.cvtColor(segmentation_mask_gray, cv2.COLOR_BGR2HSV)
 
-# Repasser dans l'espace RGB
+# Convert back to RGB color space
 superposed_mask_rgb = cv2.cvtColor(mask_hsv, cv2.COLOR_HSV2RGB)
 
-# Superposer le masque sur l'image de la personne
+# Superimpose the mask on the person's image
 superposed_image = hsv_person.copy()
 
-
+# Initialize variables for averaging pixel values
 moy = 0
 moy1 = 0
 moy2 = 0
 m = 0
-# Parcourir chaque pixel du masque et de l'image de la personne
+
+# Iterate over each pixel of the mask and the person's image
 for i in range(mask_hsv.shape[0]):
     for j in range(mask_hsv.shape[1]):
-        # Vérifier si le pixel du masque a une valeur de luminosité supérieure à 0
+        # Check if the pixel of the mask has a brightness value greater than 0
         if mask_hsv[i, j, 2] > 0:
-            # Si oui, superposer le pixel du masque sur l'image de la personne
+            # If yes, superimpose the pixel of the mask on the person's image
 
             moy = moy + superposed_image[i,j,2]%256
             moy1 = moy1 + superposed_image[i,j,1]%256
             moy2 = moy2 + superposed_image[i,j,0]%256
-            m +=1
-            superposed_image[i, j, 1] += 120 - superposed_image[i, j, 1]  # Saturation que l'on change
-            #superposed_image[i, j, 2] += superposed_image[i, j, 2] # luminosité que l'on change
-            superposed_image[i, j, 0] = 0 #Ajuster ici la couleur (la teinte) du mask que l'on veut appliquer
-        # D'apres Wiki, La teinte est codée suivant l'angle qui lui correspond sur le cercle des couleurs :
+            m += 1
+            superposed_image[i, j, 1] += 120 - superposed_image[i, j, 1]  # Change the saturation
+            #superposed_image[i, j, 2] += superposed_image[i, j, 2] # Change the brightness
+            superposed_image[i, j, 0] = 0 # Adjust the hue of the mask to apply
+        # According to Wiki, hue is coded based on the angle on the color wheel:
+        # 0° or 180: red; 30: yellow; 60: green; 90: cyan; 120: blue; 150: magenta.
 
-#0° ou 180 : rouge ;
-#30 : jaune ;
-#60 : vert ;
-#90 : cyan ;
-#120 : bleu ;
-#150 : magenta.
-
-moy = moy/m
-moy1 = moy1/m
-moy2 = moy2/m
+moy = moy / m
+moy1 = moy1 / m
+moy2 = moy2 / m
 
 print(moy)
 print(moy1)
 print(moy2)
 
-
-# Repasser dans l'espace RGB pour faire afficher l'image
+# Convert the superimposed image back to RGB for display
 superposed_image_rgb = cv2.cvtColor(superposed_image, cv2.COLOR_HSV2BGR)
 
-# Enregistrer l'image
+# Save the fused image
 cv2.imwrite('Fusion2.png', superposed_image_rgb)
 
-# Afficher l'image fusionnée
+# Display the fused image and segmentation mask
 cv2.imshow('Fused Image', superposed_image_rgb)
 cv2.imshow('SEG Image', segmentation_mask_gray)
 
