@@ -2,6 +2,7 @@
 ## Project Overview
 This project focuses on real-time hair segmentation and color transfer using deep learning techniques. It utilizes convolutional neural networks (U-Net architecture) to segment hair in images and videos, followed by realistic color transformation. The implementation is designed to be portable and deployable on embedded systems such as Raspberry Pi.
 
+
 ## Features
 - **Hair Segmentation**: Uses a deep learning model trained on the CelebAMask-HQ dataset to accurately segment hair in images.
 - **Color Transfer**: Implements color transformation using the HSV color space to achieve realistic hair color changes.
@@ -15,6 +16,8 @@ This project focuses on real-time hair segmentation and color transfer using dee
 - **Embedded System**: Raspberry Pi
 - **Web Development**: HTML, CSS, JavaScript (prototype)
 
+⚠ Warning: Before running the script, ensure you modify the file paths in the script to match your system configuration.
+
 ## Installation
 ### Requirements:
 ```bash
@@ -27,13 +30,13 @@ Raspberry Pi (for embedded implementation)
 ### Steps:
 ```bash
 # Clone this repository
-git clone <repository-url>
+git clone https://github.com/gabrielpecoraro/Hair_Segmentation.git
 
-# Install dependencies
-pip install -r requirements.txt
+# Download the Dataset
+https://www.kaggle.com/datasets/arghyadutta1/celebmask
 
 # Run the hair segmentation and color transfer script
-python main.py
+python training_main.py
 ```
 
 (Optional) Deploy on Raspberry Pi following the instructions in the documentation.
